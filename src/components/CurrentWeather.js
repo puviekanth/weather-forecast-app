@@ -1,6 +1,7 @@
 import '../styles/components/CurrentWeather.scss'
 import { getCurrentWeather } from "../api";
 import { Value } from 'sass';
+import WeatherIcon from './WeatherIcon';
 function CurrentWeather(){
     const data = getCurrentWeather();
     const {
@@ -61,7 +62,7 @@ function CurrentWeather(){
         <div className="CurrentWeather">
             <div className="temperature">
                 <div className='weather-icon'>
-                    <img src={`${process.env.PUBLIC_URL}/dist/weather_icons/set04/big/${icon_num}.png`} alt='weather_icon'/>
+                    <WeatherIcon iconNumber={icon_num} summary={summary} />
                 </div>
                 <div className='value'>
                     <div className='real'>
