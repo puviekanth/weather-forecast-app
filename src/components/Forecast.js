@@ -1,5 +1,6 @@
 import '../styles/components/Forecast.scss'
 import DailyForecastWidget from './DailyForecastWidget';
+import HorizontallyScrollable from './HorizontallyScrollable';
 import HourlyForecastWidget from './HourlyForecastWidget';
 
 function Forecast({title,data,type}){
@@ -8,19 +9,19 @@ function Forecast({title,data,type}){
             <div className="Forecast">
                 <div className="forecast-container">
                     <h3>{title}</h3>
-                    <div className='widget-container'>
+                    <HorizontallyScrollable className='widget-container'>
                        {
                         data.map((singleData)=>(
-                            <div>
+                            <div key={singleData.date || singleData.day}>
                                 {
                                     type === 'hourly'?
                                     <HourlyForecastWidget data={singleData} /> : 
                                     <DailyForecastWidget data={singleData}/>
                                 }
-                            </div>
+                            </div >
                         ))
                        }
-                    </div>
+                    </HorizontallyScrollable>
                 </div>
             </div>
         </>
