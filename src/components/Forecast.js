@@ -3,7 +3,7 @@ import DailyForecastWidget from './DailyForecastWidget';
 import HorizontallyScrollable from './HorizontallyScrollable';
 import HourlyForecastWidget from './HourlyForecastWidget';
 
-function Forecast({title,data,type}){
+function Forecast({type,title,data}){
     return(
         <>
             <div className="Forecast">
