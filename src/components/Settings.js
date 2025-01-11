@@ -3,10 +3,11 @@ import ThemeContext from '../context/themes.context';
 import '../styles/components/Settings.scss'
 function Settings(){
 
-    const {dark,setDark} = useContext(ThemeContext);
+    const {dark,setDark,saveThemeToLocalStorage} = useContext(ThemeContext);
 
     const toggleTheme = () =>{
         setDark(prevDark =>!prevDark);
+        saveThemeToLocalStorage(!dark);
     };
 
     return(
