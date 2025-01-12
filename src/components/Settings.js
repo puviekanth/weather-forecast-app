@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import ThemeContext from '../context/themes.context';
 import '../styles/components/Settings.scss'
 function Settings(){
 
+
+    const [openSettings, setOpenSettings] = useState(false);
     const {dark,setDark,saveThemeToLocalStorage} = useContext(ThemeContext);
 
     const toggleTheme = () =>{
@@ -23,8 +25,13 @@ function Settings(){
                     </div>
                 </div>
             </div>
-            <div className="settings-btn">
-            <i class="bi bi-gear-fill"></i>
+            <div className="settings-btn" onClick={()=>setOpenSettings(prevVal => !prevVal)}>
+            <i class={`bi bi-gear${openSettings ? '-fill' : ''}`}></i>
+            </div>
+            <div className={`settings-menu ${openSettings ? 'open' : ''}`}>
+                <div className='measurement-systems'>
+                    <h4>Measurement systems :</h4>
+                </div>
             </div>
         </div>
         </>

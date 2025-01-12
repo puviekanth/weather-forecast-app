@@ -19,6 +19,7 @@ function WeatherProvider({children}){
            
             const cw = await getWeatherdata('current',place.place_id,'auto');
             setCurrentWeather(cw.current);
+            console.log(cw)
 
             const hf = await getWeatherdata('hourly',place.place_id,'auto');
             setHourlyForecast(hf.hourly.data);
