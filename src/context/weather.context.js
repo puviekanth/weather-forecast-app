@@ -1,44 +1,53 @@
 import { createContext, useEffect, useState } from "react";
-import { DEFAULT_PLACE,MEASUREMENT_SYSTEMS } from "../constants/index";
+import { DEFAULT_PLACE, MEASUREMENT_SYSTEMS, UNITS } from "../constants/index";
 import { getWeatherdata } from "../api";
 
 const WeatherContext = createContext();
 
 
-function WeatherProvider({children}){
+function WeatherProvider({ children }) {
 
-    const [place,setPlace] = useState(DEFAULT_PLACE);
-    const [loading,setLoading] = useState(true);
-    const [currentWeather,setCurrentWeather] = useState({});
-    const [hourlyforecast , setHourlyForecast] = useState([]);
-    const [dailyForecast , setDailyForecast] = useState([]);
-    const [measurementSystem,setMeasurementSystem] = useState(MEASUREMENT_SYSTEMS.AUTO);
-
-    useEffect(()=>{
+    const [place, setPlace] = useState(DEFAULT_PLACE);
+    const [loading, setLoading] = useState(true);
+    const [currentWeather, setCurrentWeather] = useState({});
+    const [hourlyforecast, setHourlyForecast] = useState([]);
+    const [dailyForecast, setDailyForecast] = useState([]);
+    const [measurementSystem, setMeasurementSystem] = useState(MEASUREMENT_SYSTEMS.AUTO);
+    const [units, setUnits] = useState({});
+    useEffect(() => {
         async function _getWeatherData() {
-           setLoading(true);
-           
-            const cw = await getWeatherdata('current',place.place_id,'auto');
-            setCurrentWeather(cw.current);
-            console.log(cw)
+            setLoading(true);
 
-            const hf = await getWeatherdata('hourly',place.place_id,'auto');
+            const cw = await getWeatherdata('current', place.place_id, measurementSystem);
+            setCurrentWeather(cw.current);
+            setUnits(UNITS[cw.units]);
+
+            const hf = await getWeatherdata('hourly', place.place_id, measurementSystem);
             setHourlyForecast(hf.hourly.data);
-           
-            const df = await getWeatherdata('daily',place.place_id,'auto');
+
+            const df = await getWeatherdata('daily', place.place_id, measurementSystem);
             setDailyForecast(df.daily.data);
 
-           setLoading(false);
+            setLoading(false);
 
 
         }
         _getWeatherData();
-    },[place])
+    }, [place,measurementSystem])
 
-    return <WeatherContext.Provider value={{place,loading,currentWeather,hourlyforecast,dailyForecast,measurementSystem,setMeasurementSystem}}>
+    return <WeatherContext.Provider value={{ 
+        place, 
+        loading, 
+        currentWeather, 
+        hourlyforecast, 
+        dailyForecast, 
+        measurementSystem, 
+        setMeasurementSystem, 
+        units 
+    }}>
         {children}
     </WeatherContext.Provider>
 }
 
-export {WeatherProvider};
+export { WeatherProvider };
 export default WeatherContext;
