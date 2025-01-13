@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import WeatherIcon from "./WeatherIcon";
+import WeatherContext from "../context/weather.context";
 function HourlyForecastWidget({data}){
     const {
         icon,
@@ -7,7 +9,9 @@ function HourlyForecastWidget({data}){
         summary,
         precipitation,
         wind
-    } = data
+    } = data;
+
+    const {units} = useContext(WeatherContext);
 
 const now_date = {
     day : new Intl.DateTimeFormat(navigator.language,{
@@ -58,16 +62,16 @@ weather_date.day =
                 </div>
                 <div className="temperature">
                     {
-                        Math.round(temperature)
-                    }&deg;
+                        Math.round(temperature) 
+                    } {units.temperature}
                 </div>
             </div>
             <div className="precipitation">
-                {Math.round(precipitation.total)}mm/h
+                {Math.round(precipitation.total)} {units.precipitation}
             </div>
             <div className="wind">
                 <div className="speed">
-                {Math.round(wind.speed)}mph
+                {Math.round(wind.speed)} {units.wind_speed}
                 </div>
                 <div className="dir" style={{transform:`rotate(${-45+wind.angle}deg)`}}>
                     <i className="bi bi-send-fill"></i>

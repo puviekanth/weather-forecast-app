@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import '../styles/components/CurrentWeather.scss'
 
 import WeatherIcon from './WeatherIcon';
+import WeatherContext from '../context/weather.context';
 function CurrentWeather({data}){
     
     const {
@@ -16,43 +18,45 @@ function CurrentWeather({data}){
         temperature,
     } = data;
 
+    const {units} = useContext(WeatherContext);
+
     const otherInfoWidgets = [
         {
             id:0,
             icon:'droplet',
             name:'Precipitation',
             value:Math.round(precipitation.total),
-            unit:'in/h',
+            unit:units.precipitation,
         },{
             id:1,
             icon:'wind',
             name:'Wind',
             value:wind.speed,
-            unit:'mph',
+            unit:units.wind_speed,
         },{
             id:2,
             icon:'moisture',
             name:'Humidity',
             value:Math.round(humidity),
-            unit:'%',
+            unit:units.humidity,
         },{
             id:3,
             icon:'sunglasses',
             name:'UV Index',
             value:Math.round(uv_index),
-            unit:'',
+            unit:units.uv_index,
         },{
             id:4,
             icon:'clouds-fill',
             name:'Clouds Cover',
             value:Math.round(cloud_cover),
-            unit:'mi',
+            unit:units.cloud_cover,
         },{
             id:5,
             icon:'eye',
             name:'Visibility',
             value:Math.round(visibility),
-            unit:'mi',
+            unit:units.visibility,
         },
     ];
 
@@ -65,10 +69,10 @@ function CurrentWeather({data}){
                 </div>
                 <div className='value'>
                     <div className='real'>
-                        {temperature} &deg;
+                        {Math.round(temperature)} {units.temperature};
                     </div>
                     <div className='feels_like'>
-                        Feels like {feels_like} &deg;
+                        Feels like {feels_like} {units.temperature}
                     </div>
                 </div>
                 <div className='summary'>
