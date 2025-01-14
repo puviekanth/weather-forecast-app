@@ -43,7 +43,8 @@ function WeatherProvider({ children }) {
         dailyForecast, 
         measurementSystem, 
         setMeasurementSystem, 
-        units 
+        units,
+        setPlace,
     }}>
         {children}
     </WeatherContext.Provider>

@@ -1,5 +1,24 @@
 import '../styles/components/Search.scss'
+import { searchPlaces } from '../api';
+import { useContext, useState } from 'react';
+import WeatherContext from '../context/weather.context'
 function Search(){
+    const {setPlace} = useContext(WeatherContext);
+    const [text,setText] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [openSearchResults,setOpenSearchResults] = useState(false);
+    async function onSearch(e){
+        setText(e.target.value);
+        const data = await searchPlaces(e.target.value);
+        setSearchResults(data);
+        setOpenSearchResults(data.length);
+    }
+
+    const changePlace = (place) =>  {
+        setPlace(place);
+        setText('');
+        setOpenSearchResults(false);
+    }
     return(
         <>
         <div className="search-container">
@@ -10,8 +29,27 @@ function Search(){
                 <input 
                 type="text"
                 name="search-city"
-                placeholder="Search City..." />
+                placeholder="Search City..."
+                value={text}
+                onChange={onSearch} />
             </div>
+           {
+            openSearchResults && (
+            <div className='search-results'>
+            <div className='results-container'>
+               {
+                searchResults.map((places)=>(
+                
+                <div className='result' key={places.place_id} onClick={() => changePlace(places)}>
+                  {places.name}, {places.adm_area1}, {places.country}
+                </div>
+                ))
+                    
+                
+               }
+            </div>
+        </div>
+           )}
         </div>
         </>
     );
