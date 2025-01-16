@@ -14,6 +14,12 @@ function WeatherProvider({ children }) {
     const [dailyForecast, setDailyForecast] = useState([]);
     const [measurementSystem, setMeasurementSystem] = useState(MEASUREMENT_SYSTEMS.AUTO);
     const [units, setUnits] = useState({});
+
+
+
+
+
+    
     useEffect(() => {
         async function _getWeatherData() {
             setLoading(true);

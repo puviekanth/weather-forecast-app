@@ -1,13 +1,13 @@
 export const DEFAULT_PLACE = {
-name:"London",
-place_id:"london",
-adm_area1:"England",
-adm_area2:"Greater London",
-country:"United Kingdom",
-lat:"51.50853N",
-lon:"0.12574W",
-timezone:"Europe/London",
-type:"settlement",
+    name:"Kandy",
+    place_id:"kandy",
+    adm_area1:"Central",
+    adm_area2:null,
+    country:"Sri Lanka",
+    lat:"7.2906N",
+    lon:"80.6336E",
+    timezone:"Asia/Colombo",
+    type:"settlement",
 };
 export const MEASUREMENT_SYSTEMS = {
     AUTO : 'auto',

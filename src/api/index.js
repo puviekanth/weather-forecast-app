@@ -15,7 +15,7 @@ const options = {
     units: measurementSystem,
   },
   headers: {
-    'x-rapidapi-key': API_KEY,
+    'x-rapidapi-key': 'eb59cecce9msh74c91b68b28b613p11c6c2jsneceb4d29140e',
     'x-rapidapi-host': 'ai-weather-by-meteosource.p.rapidapi.com'
   }
 };
@@ -37,7 +37,7 @@ export async function searchPlaces(text){
       language: 'en'
     },
     headers: {
-      'x-rapidapi-key': API_KEY,
+      'x-rapidapi-key': 'eb59cecce9msh74c91b68b28b613p11c6c2jsneceb4d29140e',
       'x-rapidapi-host': 'ai-weather-by-meteosource.p.rapidapi.com'
     }
   };
